@@ -24,6 +24,8 @@ class MEAPKnob extends HTMLElement {
                     background: #444;
                     position: relative;
                     cursor: pointer;
+                    transition: transform 0.1s ease;
+                    transform-origin: center;
                 }
                 .knob::after {
                     content: '';
@@ -39,10 +41,16 @@ class MEAPKnob extends HTMLElement {
                     margin-top: 10px;
                     font-family: sans-serif;
                 }
+                .value {
+                    margin-top: 5px;
+                    font-family: sans-serif;
+                    font-weight: bold;
+                }
             </style>
             <div class="knob-container">
                 <div class="knob" id="knob-${this.knobId}"></div>
                 <div class="label">${this.label}</div>
+                <div class="value" id="value-${this.knobId}">Value: 0</div>
             </div>
         `;
 
@@ -54,6 +62,7 @@ class MEAPKnob extends HTMLElement {
         let isDragging = false;
         let startY;
         let currentValue = 0;
+        const sensitivityFactor = 5;
 
         knob.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -65,7 +74,7 @@ class MEAPKnob extends HTMLElement {
             if (!isDragging) return;
             
             const deltaY = startY - e.clientY;
-            currentValue = Math.max(0, Math.min(4095, currentValue + deltaY));
+            currentValue = Math.max(0, Math.min(4095, currentValue + deltaY * sensitivityFactor));
             startY = e.clientY;
             
             this.setValue(currentValue);
@@ -81,10 +90,17 @@ class MEAPKnob extends HTMLElement {
 
     setValue(value) {
         this.value = value;
-        const rotation = (value / 4095) * 270; // 270 degrees of rotation
-        const knob = this.shadowRoot.querySelector('.knob::after');
+        const maxPotValue = 4095; // Maximum value of the potentiometer
+        const rotation = (value / maxPotValue) * 270; // 270 degrees of rotation
+        const knob = this.shadowRoot.querySelector('.knob');
+        const valueDisplay = this.shadowRoot.querySelector(`#value-${this.knobId}`);
+        
         if (knob) {
-            knob.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+            knob.style.transform = `rotate(${rotation}deg)`; // Rotate the knob
+        }
+        
+        if (valueDisplay) {
+            valueDisplay.textContent = `Value: ${value}`; // Update the displayed value
         }
     }
 }
