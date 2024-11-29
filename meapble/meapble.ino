@@ -99,12 +99,14 @@ void loop() {
                 Serial.print("Pot3 value received: ");
                 Serial.println(blePot3Value);
             }
-            
-            audioHook();
+          
+        audioHook();
+
         }
-        
+
         Serial.println("Disconnected from central");
     }
+
 }
 
 void updateControl() {
@@ -115,15 +117,17 @@ void updateControl() {
     // int pot2Value = (blePot2Value > 0) ? blePot2Value : meap.pot_vals[1];
     // int pot3Value = (blePot3Value > 0) ? blePot3Value : meap.pot_vals[2];
 
-    // Map pot1 to frequency range (you can adjust the ranges for each pot as needed)
-    float my_freq = map(blePot1Value, 0, 4095, 20, 2000); // instead of pot1value use blePot1Value??? Ask prof about this...
-    float my_amp = map(blePot2Value, 0, 4095, 0, 255);
-    float my_mod = map(blePot3Value, 0, 4095, 0, 100);
+    // Map pot1 to frequency range (adjust the ranges for each pot as needed)
+    float my_freq = map(blePot1Value, 0, 4095, 20, 2000); 
+  
+    // // Map pot2 to a phase increment
+    // float my_phase = map(blePot2Value, 0, 4095, 0, 255);
+
+    // // Map pot3 to something else
+    // float my_something_else = map(blePot3Value, 0, 4095, 0, 100);
     
-    // Control frequency of oscillator
-    my_sine.setFreq(my_freq);
-    my_sine.setFreq(my_amp);
-    my_sine.setFreq(my_mod);
+    // Control blepotentiometers
+    my_sine.setFreq(my_freq * octave_multiplier); // pot1
 
 }
 
@@ -148,7 +152,7 @@ void updateTouch(int number, bool pressed) {
       if (pressed) {  // Pad 0 pressed
         Serial.println("t0 pressed ");
         my_sine.setFreq(220);  // A3
-      } else {                 // Pad 0 released
+      } else {                 // Pad 0 released  
         Serial.println("t0 released");
       }
       break;
