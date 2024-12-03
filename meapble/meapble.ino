@@ -1,5 +1,5 @@
 /*
-  Constant sine wave output with BLE Potentiometer Control
+  MEAP with BLE Potentiometer Control
  */
 
 #define CONTROL_RATE 128  // Hz, powers of 2 are most reliable
@@ -112,22 +112,19 @@ void loop() {
 void updateControl() {
     meap.readInputs();  // Read all inputs including potentiometers
 
-    // Use either BLE values or physical pot values
-    // int pot1Value = (blePot1Value > 0) ? blePot1Value : meap.pot_vals[0];
-    // int pot2Value = (blePot2Value > 0) ? blePot2Value : meap.pot_vals[1];
-    // int pot3Value = (blePot3Value > 0) ? blePot3Value : meap.pot_vals[2];
-
     // Map pot1 to frequency range (adjust the ranges for each pot as needed)
-    float my_freq = map(blePot1Value, 0, 4095, 20, 2000); 
+    float my_freq1 = map(blePot1Value, 0, 4095, 20, 2000); 
   
-    // // Map pot2 to a phase increment
-    // float my_phase = map(blePot2Value, 0, 4095, 0, 255);
+    // Map pot2 to frequency range (adjust the ranges for each pot as needed)
+    float my_freq2 = map(blePot2Value, 0, 4095, 20, 2000); 
 
-    // // Map pot3 to something else
-    // float my_something_else = map(blePot3Value, 0, 4095, 0, 100);
-    
+    // Map pot3 to frequency range (adjust the ranges for each pot as needed)
+    float my_freq3 = map(blePot3Value, 0, 4095, 20, 2000); 
+
     // Control blepotentiometers
-    my_sine.setFreq(my_freq * octave_multiplier); // pot1
+    my_sine.setFreq(my_freq1 * octave_multiplier); 
+    my_sine.setFreq(my_freq2 * octave_multiplier); 
+    my_sine.setFreq(my_freq3 * octave_multiplier); 
 
 }
 
