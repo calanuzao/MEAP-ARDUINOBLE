@@ -1,5 +1,5 @@
 /*
-  MEAP with BLE Potentiometer Control
+  Constant sine wave output with BLE Potentiometer Control
  */
 
 #define CONTROL_RATE 128  // Hz, powers of 2 are most reliable
