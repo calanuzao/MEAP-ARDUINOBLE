@@ -178,7 +178,7 @@ AudioOutput_t updateAudio() {
                 l_sample = l_filter.high();
                 r_sample = r_filter.high();
                 break;
-        }
+        } 
         
         if (filterMix < 1.0) {
             l_sample = (l_sample * filterMix + l_dry * (1.0 - filterMix));
