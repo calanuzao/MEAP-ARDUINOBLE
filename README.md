@@ -55,16 +55,13 @@ Here are some ways to generate a valid UUID:
 
    ```bash
    uuidgen | tr '[:upper:]' '[:lower:]'
-   ```
 
 Windows: Use PowerShell:
 
 powershell
 
-Copy code
    ```bash
    [guid]::NewGuid().ToString().ToLower()
-   ```
 
 Online UUID Generators: Use an online tool such as UUIDGenerator.net. Ensure you convert the result to lowercase if it's not already.
 
@@ -75,7 +72,6 @@ Replace the UUID in the following line in your Arduino code:
    ```cpp
 
    BLEService meapService("a597fb2d-5947-5bb6-9b20-9fa9ec68916f");
-   ```
 
 Ensure the same UUID is updated in the corresponding JavaScript setup file within meap-web to maintain compatibility.
 
@@ -95,9 +91,9 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
 - Ensure the required libraries are installed in your Arduino IDE:
 
-  - MEAP
+- MEAP
 
-  - ArduinoBLE
+- ArduinoBLE
 
 - Use the Arduino Library Manager or add the libraries manually if they are not installed.
 
@@ -117,7 +113,6 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
    cd meap-web
 
-   ```
 
 2\. Install the required Node.js dependencies:
 
@@ -125,7 +120,6 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
    npm install
 
-   ```
 
 3\. Start the hosting environment:
 
@@ -133,7 +127,6 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
    npm start
 
-   ```
 
 4\. Open the hosting website in Google Chrome (other browsers are not supported for this version):
 
@@ -141,7 +134,6 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
    google-chrome http://localhost:3000
 
-   ```
 
 5\. Follow these steps in the browser:
 
@@ -155,6 +147,5 @@ Ensure the same UUID is updated in the corresponding JavaScript setup file withi
 
    MEAP Connected!
 
-   ```
 
 ### Have Fun with Bluetooth Music!!!
